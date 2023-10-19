@@ -22,7 +22,6 @@
 // createBooking('LH123',2)
 // createBooking('LH123',5)
 
-
 // const flight = 'LH234';
 // const elena = {
 //     name:'Elena Cristescu',
@@ -69,7 +68,6 @@
 // transformer('JavaScript is the best!',upperFirstWord);
 // transformer('JavaScript is the best!',oneWord);
 
-
 // //JS callbacks
 // const high5 = function(){
 //     console.log('✋');
@@ -79,18 +77,67 @@
 
 // ['Elena','Martha','Adam'].forEach(high5);
 
-const greet = function(greeting){
-    return function(name){
-        console.log(`${greeting} ${name}`);
-    }
-}
-const greeterHey = greet("Hey");
+//Functions returning Functions
+// const greet = function(greeting){
+//     return function(name){
+//         console.log(`${greeting} ${name}`);
+//     }
+// }
+// const greeterHey = greet("Hey");
 
-greeterHey('Elena');
-greeterHey('Adam ');
+// greeterHey('Elena');
+// greeterHey('Adam ');
 
-greet('Hello')('Elle');
+// greet('Hello')('Elle');
 
-const greetArr = greeting => name=>console.log(`${greeting} ${name}`);
+// const greetArr = greeting => name=>console.log(`${greeting} ${name}`);
 
-greetArr('Hey')('Amanda');
+// greetArr('Hey')('Amanda');
+
+//The call and apply Method
+
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  //book:function(){}
+  book(flightNum, name) {
+    console.log(
+      `${name}  booked a seat on ${this.airline} fligh ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  },
+};
+
+lufthansa.book(234, 'Elena Cristescu');
+lufthansa.book(673, 'John Smith');
+console.log(lufthansa);
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+const book = lufthansa.book;
+//Does NOT Work
+//book(23, 'Sarah Williams');
+
+//CALL Method
+book.call(eurowings, 23, 'Sarah Williams');
+console.log(eurowings);
+
+book.call(lufthansa, 247, 'Mary Copper');
+console.log(lufthansa);
+
+const swiss = {
+  airline: 'Swiss Air Line',
+  iataCode: 'LX',
+  bookings: [],
+};
+book.call(swiss, 753, 'Mary Cooper');
+console.log(swiss);
+
+const flightData = [575, 'George Cooper'];
+book.apply(swiss, flightData);
+console.log(swiss);
