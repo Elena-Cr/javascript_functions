@@ -181,3 +181,33 @@ const addTaxRate = function (rate) {
 const addVAT2 = addTaxRate(0.23);
 
 console.log(addVAT2(100));
+
+//Challenge 1
+const poll = {
+  question: 'What is your favourite programming language?',
+  options: ['0: JavaScript', '1: Python', '2: Rust', '3:C++'],
+  // This generates [0, 0, 0, 0]. More in the next section!
+  answers: new Array(4).fill(0),
+};
+
+poll.registerNewAnswer = function () {
+  let answer = +prompt(
+    'What is your favourite programming language?\n 0: JavaScript \n 1: Python \n 2: Rust \n 3: C++\n(Write option number)'
+  );
+  if (answer && typeof answer === 'number' && answer > -1 && answer < 4) {
+    // console.log(answer, 'call');
+    poll.answers[answer]++;
+    console.log(poll);
+  } else {
+    answer = prompt(
+      'Please select one of the following options: \n What is your favourite programming language?\n 0: JavaScript \n 1: Python \n 2: Rust \n 3: C++\n(Write option number)'
+    );
+  }
+};
+
+document
+  .querySelector('.poll')
+  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+// poll.registerNewAnswer();
+// console.log(poll);
