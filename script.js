@@ -209,27 +209,42 @@
 //   .querySelector('.poll')
 //   .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
-// // poll.registerNewAnswer();
-// // console.log(poll);
-const runOnce = function () {
-  console.log('This will never run again');
+//  poll.registerNewAnswer();
+//  console.log(poll);
+
+// const runOnce = function () {
+//   console.log('This will never run again');
+// };
+// runOnce();
+
+// //IIFE Immediatialey Invoked Function Expresion
+// (function () {
+//   console.log('This will never run again');
+//   const isPrivate = 23;
+// })();
+
+// // console.log(isPrivate);
+
+// (() => console.log('This ALSO will never run again'))();
+
+// {
+//   const isPrivate = 23;
+//   //var variables ignore blocks
+//   var notPrivate = 12;
+// }
+// //console.log(isPrivate);
+// console.log(notPrivate);
+
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
 };
-runOnce();
 
-//IIFE Immediatialey Invoked Function Expresion
-(function () {
-  console.log('This will never run again');
-  const isPrivate = 23;
-})();
-
-// console.log(isPrivate);
-
-(() => console.log('This ALSO will never run again'))();
-
-{
-  const isPrivate = 23;
-  //var variables ignore blocks
-  var notPrivate = 12;
-}
-//console.log(isPrivate);
-console.log(notPrivate);
+const booker = secureBooking();
+booker();
+booker();
+booker();
