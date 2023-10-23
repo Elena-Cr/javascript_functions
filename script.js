@@ -235,16 +235,60 @@
 // //console.log(isPrivate);
 // console.log(notPrivate);
 
-const secureBooking = function () {
-  let passengerCount = 0;
+// const secureBooking = function () {
+//   let passengerCount = 0;
 
-  return function () {
-    passengerCount++;
-    console.log(`${passengerCount} passengers`);
+//   return function () {
+//     passengerCount++;
+//     console.log(`${passengerCount} passengers`);
+//   };
+// };
+
+// const booker = secureBooking();
+// booker();
+// booker();
+// booker();
+
+//Example 1
+let f;
+
+const g = function () {
+  const a = 12;
+  f = function () {
+    console.log(a * 2);
   };
 };
 
-const booker = secureBooking();
-booker();
-booker();
-booker();
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f();
+console.dir(f);
+
+//Re-assigning f function
+h();
+f();
+console.dir(f);
+
+//Example 2
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+
+  console.log(`Will start boarding in ${wait} seconds `);
+};
+
+//  Closure has priority over the scope chain
+// const perGroup = 1000;
+boardPassengers(180, 3);
+
+//Challenge
